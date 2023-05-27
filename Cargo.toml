@@ -1,0 +1,12 @@
+[package]
+name = "mrg"
+version = "0.1.0"
+edition = "2021"
+description = "Deserialize Gravity Defied **levels.mrg** files"
+license = "GPL-3.0"
+repository = "https://github.com/mrtnvgr/mrg"
+keywords = ["mrg"]
+
+[dependencies]
+anyhow = "1.0.71"
+endianness = "0.2.0"
