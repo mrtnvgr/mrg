@@ -1,9 +1,6 @@
 mod deserializer;
 mod point;
 
-#[cfg(test)]
-mod tests;
-
 pub struct Mrg {
     pub easy: Difficulty,
     pub normal: Difficulty,

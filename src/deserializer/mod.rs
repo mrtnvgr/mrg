@@ -2,6 +2,9 @@ mod difficulty;
 mod reader;
 mod track;
 
+#[cfg(test)]
+mod tests;
+
 use self::reader::Reader;
 use crate::{Difficulty, Mrg};
 
