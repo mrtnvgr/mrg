@@ -26,22 +26,14 @@ impl Track {
         points.push(Point::new(point_x, point_y));
 
         for _ in 1..points_count {
-            let x = track_reader.read_byte()?;
+            let x = track_reader.read_byte();
+            let y = track_reader.read_byte();
+
+            point_x += i32::from(x);
+            point_y += i32::from(y);
 
             if x == -1 {
-                let x = track_reader.read_int()?;
-                let mut y = track_reader.read_int()?;
-
-                if y > 127 {
-                    y = 0;
-                }
-
-                point_x = x;
-                point_y = y;
-            } else {
-                let y = track_reader.read_byte()?;
-                point_x += i32::from(x);
-                point_y += i32::from(y);
+                break;
             }
 
             points.push(Point::new(point_x, point_y));
