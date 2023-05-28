@@ -1,3 +1,5 @@
+#![allow(clippy::indexing_slicing)]
+
 use anyhow::Result;
 use endianness::{read_i16, read_i32, ByteOrder};
 
@@ -35,9 +37,9 @@ impl<'re> Reader<'re> {
         Ok(value)
     }
 
-    pub fn read_byte(&mut self) -> Result<i8> {
+    pub fn read_byte(&mut self) -> i8 {
         let value = self.bytes[self.offset];
         self.offset += std::mem::size_of::<i8>();
-        Ok(value as i8)
+        value as i8
     }
 }

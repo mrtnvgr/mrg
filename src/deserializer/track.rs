@@ -5,7 +5,7 @@ impl Track {
     pub fn new(reader: &mut Reader, name: String, offset: usize) -> anyhow::Result<Self> {
         let mut track_reader = reader.clone_from_offset(offset).unwrap();
 
-        assert_eq!(track_reader.read_byte()?, 0x33, "Invalid track start byte");
+        assert_eq!(track_reader.read_byte(), 0x33, "Invalid track start byte");
 
         let perform_magic = |i| (i >> 16) << 3;
 

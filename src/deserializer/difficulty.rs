@@ -13,7 +13,7 @@ impl Difficulty {
 
             let mut name: Vec<u8> = Vec::new();
             loop {
-                let byte = reader.read_byte()?;
+                let byte = reader.read_byte();
 
                 if byte == 0x00 {
                     break;
