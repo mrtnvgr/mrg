@@ -1,6 +1,6 @@
 # mrg
 
-A library for parsing and serializing Gravity Defied levels.mrg files.
+A library for parsing and serializing Gravity Defied levels.
 
 ## MRG Structure
 
