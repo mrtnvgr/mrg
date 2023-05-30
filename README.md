@@ -1,6 +1,6 @@
 # mrg
 
-Deserialize Gravity Defied **levels.mrg** files.
+A library for parsing and serializing Gravity Defied levels.mrg files.
 
 ## MRG Structure
 

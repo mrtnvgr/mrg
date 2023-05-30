@@ -22,7 +22,7 @@ impl Difficulty {
                 name.extend(byte.to_be_bytes());
             }
 
-            let name = String::from_utf8_lossy(&name).to_string();
+            let name = String::from_utf8(name)?;
             tracks.push(Track::new(reader, name, offset.try_into().unwrap())?);
         }
 
