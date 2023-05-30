@@ -7,9 +7,10 @@ mod tests;
 
 use self::reader::Reader;
 use crate::{Difficulty, Mrg};
+use anyhow::Result;
 
 impl Mrg {
-    pub fn from_bytes(bytes: Vec<u8>) -> anyhow::Result<Self> {
+    pub fn from_bytes(bytes: Vec<u8>) -> Result<Self> {
         let mut reader = Reader::new(bytes);
         let easy = Difficulty::from_reader(&mut reader)?;
         let normal = Difficulty::from_reader(&mut reader)?;

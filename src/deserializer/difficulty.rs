@@ -23,7 +23,7 @@ impl Difficulty {
             }
 
             let name = String::from_utf8(name)?;
-            tracks.push(Track::new(reader, name, offset.try_into().unwrap())?);
+            tracks.push(Track::new(reader, name, offset.try_into()?)?);
         }
 
         Ok(Self { tracks })

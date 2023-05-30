@@ -13,16 +13,11 @@ impl Reader {
         Self { cursor }
     }
 
-    pub fn clone_from_offset(&self, offset: usize) -> Option<Self> {
+    pub fn clone_from_offset(&self, offset: usize) -> Self {
         let bytes = self.cursor.get_ref().clone();
-
-        if bytes.len() > offset {
-            let mut cursor = Cursor::new(bytes);
-            cursor.set_position(offset as u64);
-            Some(Self { cursor })
-        } else {
-            None
-        }
+        let mut cursor = Cursor::new(bytes);
+        cursor.set_position(offset as u64);
+        Self { cursor }
     }
 
     pub fn read_int(&mut self) -> Result<i32> {

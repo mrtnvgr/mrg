@@ -8,9 +8,11 @@ fn serialize_mrg() {
     let mrg = Mrg::from_bytes(bytes.clone()).unwrap();
     let mrg_track = &mrg.easy.tracks[0];
 
-    fs::write("/home/user/test.mrg", mrg.to_bytes()).unwrap();
+    let new_bytes = mrg.to_bytes().unwrap();
 
-    let new = Mrg::from_bytes(mrg.to_bytes()).unwrap();
+    fs::write("/home/user/test.mrg", &new_bytes).unwrap();
+
+    let new = Mrg::from_bytes(new_bytes).unwrap();
     let new_track = &new.easy.tracks[0];
 
     assert_eq!(new_track.start.to_tuple(), mrg_track.start.to_tuple());
