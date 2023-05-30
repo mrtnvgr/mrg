@@ -1,45 +1,39 @@
 #![allow(clippy::indexing_slicing)]
 
-use anyhow::Result;
-use endianness::{read_i16, read_i32, ByteOrder};
+use byteorder::{BigEndian, ReadBytesExt};
+use std::io::{Cursor, Result};
 
-pub struct Reader<'re> {
-    bytes: &'re [u8],
-    offset: usize,
+pub struct Reader {
+    cursor: Cursor<Vec<u8>>,
 }
 
-impl<'re> Reader<'re> {
-    pub const fn new(bytes: &'re [u8]) -> Self {
-        let offset = 0;
-        Self { bytes, offset }
+impl Reader {
+    pub fn new(bytes: Vec<u8>) -> Self {
+        let cursor = Cursor::new(bytes);
+        Self { cursor }
     }
 
-    pub const fn clone_from_offset(&self, offset: usize) -> Option<Self> {
-        if offset > self.bytes.len() {
-            None
+    pub fn clone_from_offset(&self, offset: usize) -> Option<Self> {
+        let bytes = self.cursor.get_ref().clone();
+
+        if bytes.len() > offset {
+            let mut cursor = Cursor::new(bytes);
+            cursor.set_position(offset as u64);
+            Some(Self { cursor })
         } else {
-            Some(Self {
-                bytes: self.bytes,
-                offset,
-            })
+            None
         }
     }
 
     pub fn read_int(&mut self) -> Result<i32> {
-        let value = read_i32(&self.bytes[self.offset..], ByteOrder::BigEndian)?;
-        self.offset += std::mem::size_of::<i32>();
-        Ok(value)
+        self.cursor.read_i32::<BigEndian>()
     }
 
     pub fn read_short(&mut self) -> Result<i16> {
-        let value = read_i16(&self.bytes[self.offset..], ByteOrder::BigEndian)?;
-        self.offset += std::mem::size_of::<i16>();
-        Ok(value)
+        self.cursor.read_i16::<BigEndian>()
     }
 
-    pub fn read_byte(&mut self) -> i8 {
-        let value = self.bytes[self.offset];
-        self.offset += std::mem::size_of::<i8>();
-        value as i8
+    pub fn read_byte(&mut self) -> Result<i8> {
+        self.cursor.read_i8()
     }
 }

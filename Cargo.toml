@@ -9,4 +9,4 @@ keywords = ["mrg"]
 
 [dependencies]
 anyhow = "1.0.71"
-endianness = "0.2.0"
+byteorder = "1.4.3"

@@ -18,11 +18,12 @@ fn check_track() {
     assert_eq!(track.finish.to_tuple(), (432, 0));
 
     let points = &track.points;
+    assert_eq!(points.len(), 45);
     assert_eq!(points[0].to_tuple(), (-380, 136));
     assert_eq!(points[points.len() - 1].to_tuple(), (798, 67));
 }
 
 fn get_mrg() -> Mrg {
     let bytes = fs::read("levels.mrg").unwrap();
-    Mrg::from_bytes(&bytes).unwrap()
+    Mrg::from_bytes(bytes).unwrap()
 }
