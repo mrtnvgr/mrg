@@ -3,7 +3,7 @@ use crate::{Difficulty, Track};
 use anyhow::Result;
 
 impl Difficulty {
-    pub fn from_reader(reader: &mut Reader) -> Result<Self> {
+    pub(super) fn from_reader(reader: &mut Reader) -> Result<Self> {
         let track_count = reader.read_int()?;
 
         let mut tracks: Vec<Track> = Vec::new();

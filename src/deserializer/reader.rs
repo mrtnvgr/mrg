@@ -3,7 +3,7 @@
 use byteorder::{BigEndian, ReadBytesExt};
 use std::io::{Cursor, Result};
 
-pub struct Reader {
+pub(super) struct Reader {
     cursor: Cursor<Vec<u8>>,
 }
 

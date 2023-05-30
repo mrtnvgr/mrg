@@ -3,7 +3,7 @@ use crate::{Point, Track};
 use anyhow::Result;
 
 impl Track {
-    pub fn new(reader: &mut Reader, name: String, offset: usize) -> Result<Self> {
+    pub(super) fn new(reader: &mut Reader, name: String, offset: usize) -> Result<Self> {
         let mut track_reader = reader.clone_from_offset(offset);
 
         assert_eq!(track_reader.read_byte()?, 0x33, "Invalid track start byte");
