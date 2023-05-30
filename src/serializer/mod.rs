@@ -11,6 +11,7 @@ use anyhow::Result;
 use std::iter::zip;
 
 impl Mrg {
+    #[deprecated(note = "please avoid using serializing yet")]
     pub fn to_bytes(&self) -> Result<Vec<u8>> {
         let mut body_buffer: Vec<u8> = Vec::new();
         let mut track_offsets: Vec<Vec<usize>> = Vec::new();
