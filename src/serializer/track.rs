@@ -33,8 +33,8 @@ impl Track {
 
             if i8::try_from(x).is_err() || i8::try_from(y).is_err() {
                 buffer.write_byte(-1)?;
-                buffer.write_int(x)?;
-                buffer.write_int(y)?;
+                buffer.write_int(point.x)?;
+                buffer.write_int(point.y)?;
             } else {
                 buffer.write_byte(i8::try_from(x)?)?;
                 buffer.write_byte(i8::try_from(y)?)?;
