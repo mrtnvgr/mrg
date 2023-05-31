@@ -1,4 +1,3 @@
-#![allow(clippy::indexing_slicing)]
 use crate::Mrg;
 use std::fs;
 
@@ -12,15 +11,19 @@ fn check_tracks_count() {
 
 #[test]
 fn check_track() {
-    let track = &get_mrg().easy.tracks[0];
+    let mrg = get_mrg();
+
+    let track = &mrg.easy.tracks.first().unwrap();
+
     assert_eq!(track.name, "Intro");
     assert_eq!(track.start.to_tuple(), (-56, 24));
     assert_eq!(track.finish.to_tuple(), (432, 0));
 
     let points = &track.points;
     assert_eq!(points.len(), 45);
-    assert_eq!(points[0].to_tuple(), (-380, 136));
-    assert_eq!(points[points.len() - 1].to_tuple(), (798, 67));
+
+    assert_eq!(points.first().unwrap().to_tuple(), (-380, 136));
+    assert_eq!(points.last().unwrap().to_tuple(), (798, 67));
 }
 
 fn get_mrg() -> Mrg {

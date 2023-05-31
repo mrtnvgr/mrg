@@ -1,5 +1,3 @@
-#![allow(clippy::indexing_slicing)]
-
 use byteorder::{BigEndian, ReadBytesExt};
 use std::io::{Cursor, Result};
 
