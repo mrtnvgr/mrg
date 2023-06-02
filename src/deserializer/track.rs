@@ -1,12 +1,15 @@
 use super::reader::Reader;
 use crate::{Point, Track};
-use anyhow::Result;
+use anyhow::{bail, Result};
 
 impl Track {
     pub(super) fn new(reader: &mut Reader, name: String, offset: usize) -> Result<Self> {
         let mut track_reader = reader.clone_from_offset(offset);
 
-        assert_eq!(track_reader.read_byte()?, 0x33, "Invalid track start byte");
+        let start_byte = track_reader.read_byte()?;
+        if start_byte != 0x33 {
+            bail!("Invalid track start byte: {start_byte} at {offset}");
+        }
 
         let perform_magic = |i| (i >> 16) << 3;
 
