@@ -1,6 +1,7 @@
 use super::reader::Reader;
 use crate::{Difficulty, Track};
 use anyhow::Result;
+use encoding_rs::WINDOWS_1251;
 
 impl Difficulty {
     pub(super) fn from_reader(reader: &mut Reader) -> Result<Self> {
@@ -22,10 +23,22 @@ impl Difficulty {
                 name.extend(byte.to_be_bytes());
             }
 
-            let name = String::from_utf8(name)?;
+            let name = decode_windows_string(name);
             tracks.push(Track::new(reader, name, offset.try_into()?)?);
         }
 
         Ok(Self { tracks })
+    }
+}
+
+fn decode_windows_string(bytes: Vec<u8>) -> String {
+    let from_1251 = WINDOWS_1251.decode(&bytes);
+    let cow = from_1251.0;
+    let success = from_1251.2;
+
+    if success {
+        String::from_utf8(bytes).unwrap()
+    } else {
+        String::from(cow)
     }
 }
