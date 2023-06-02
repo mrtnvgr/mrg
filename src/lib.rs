@@ -2,7 +2,7 @@ mod deserializer;
 mod point;
 mod serializer;
 
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct Mrg {
     pub easy: Difficulty,
     pub normal: Difficulty,
@@ -17,7 +17,7 @@ pub struct Track {
     pub points: Vec<Point>,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct Difficulty {
     pub tracks: Vec<Track>,
 }
