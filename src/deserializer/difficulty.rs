@@ -10,7 +10,7 @@ impl Difficulty {
         let mut tracks: Vec<Track> = Vec::new();
 
         for _ in 0..track_count {
-            let Ok(offset) = reader.read_int() else { break };
+            let offset = reader.read_int()?;
 
             let mut name: Vec<u8> = Vec::new();
             loop {
