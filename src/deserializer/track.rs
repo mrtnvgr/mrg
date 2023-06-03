@@ -8,7 +8,7 @@ impl Track {
 
         let start_byte = track_reader.read_byte()?;
         if start_byte != 0x33 {
-            bail!("Invalid track start byte: {start_byte} at {offset}");
+            bail!("Invalid \"{name}\" start byte: {start_byte} at {offset}");
         }
 
         let perform_magic = |i| (i >> 16) << 3;
